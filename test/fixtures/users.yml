@@ -1,0 +1,19 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  seq: 1
+  code: MyString
+  email: MyString
+  password_digest: MyString
+  is_admin: false
+  login_at: 2016-07-09 14:06:05
+  logout_at: 2016-07-09 14:06:05
+
+two:
+  seq: 1
+  code: MyString
+  email: MyString
+  password_digest: MyString
+  is_admin: false
+  login_at: 2016-07-09 14:06:05
+  logout_at: 2016-07-09 14:06:05
