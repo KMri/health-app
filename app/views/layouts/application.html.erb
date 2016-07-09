@@ -1,14 +1,39 @@
 <!DOCTYPE html>
 <html>
-<head>
-  <title>HealthApp</title>
-  <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true %>
-  <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
-  <%= csrf_meta_tags %>
-</head>
-<body>
-
-<%= yield %>
-
-</body>
+  <head>
+    <title><%= full_title(yield(:title)) %></title>
+    <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true %>
+    <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
+    <%= csrf_meta_tags %>
+  </head>
+  <body>
+    
+    <%# ナビゲーション %>
+    <header>
+      <div class="container">
+        <%= link_to("sample app", '#', {class: "uk-navbar-brand", id: "logo"}) %>
+        <nav class="uk-navbar">
+          <ul class="uk-navbar-nav">
+            <li><%= link_to "Home",root_path %></li>
+            <li><%= link_to "Training",   '#' %></li>
+            <li><%= link_to "Management",   '#' %></li>
+            <li><%= link_to "Articles",   '#' %></li>
+            <li class="uk-parent" data-uk-dropdown>
+              <%= link_to "Log in", '' %>
+              <div class="uk-dropdown-navbar uk-dropdown">
+                
+                <div class="uk-dropdown-blank uk-panel uk-panel-box">test</div>
+              </div>
+            </li>
+          </ul>
+        </nav>
+      </div>
+    </header>
+    
+  <%# ページ埋め込み %>
+  <div class="container">
+    <%= yield %>
+  </div>
+  
+  </body>
 </html>
