@@ -8,4 +8,8 @@ module ApplicationHelper
       "#{page_title} | #{base_title}"
     end
   end
+  
+  def user_new
+    @user = User.new
+  end
 end

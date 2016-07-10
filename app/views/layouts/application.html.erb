@@ -10,7 +10,7 @@
     
     <%# ナビゲーション %>
     <header>
-      <div class="container">
+      <div class="uk-container">
         <%= link_to("sample app", '#', {class: "uk-navbar-brand", id: "logo"}) %>
         <nav class="uk-navbar">
           <ul class="uk-navbar-nav">
@@ -18,11 +18,26 @@
             <li><%= link_to "Training",   '#' %></li>
             <li><%= link_to "Management",   '#' %></li>
             <li><%= link_to "Articles",   '#' %></li>
-            <li class="uk-parent" data-uk-dropdown>
+            <li class="uk-parent"  data-uk-dropdown>
               <%= link_to "Log in", '' %>
-              <div class="uk-dropdown-navbar uk-dropdown">
-                
-                <div class="uk-dropdown-blank uk-panel uk-panel-box">test</div>
+              <div class="uk-dropdown-navbar uk-dropdown uk-dropdown-bottom">
+                <div class="uk-dropdown-blank uk-panel uk-panel-box">
+                  <%# ログイン・サインアップのフォーム %>
+                  <%= form_for(user_new, {html: {class: "uk-form uk-form-stacked"}}) do |f| %>
+                    <fieldset data-uk-margin>
+                      <div class="uk-form-row uk-form-controls">
+                        <%= f.label(:email, {class: "uk-form-label"}) %>
+                        <%= f.text_field(:email) %>
+                      </div>
+                      <div class="uk-form-row uk-form-controls">
+                        <%= f.label(:password, 'Password', {class: "uk-form-label"}) %>
+                        <%= f.password_field(:password) %>
+                      </div>
+                    </fieldset>
+                    <%= f.submit("login", {class: "uk-button"}) %>
+                    <%= link_to("sign up", users_path, {class: "uk-button uk-button-primary"}) %>
+                  <% end %>
+                </div>
               </div>
             </li>
           </ul>
