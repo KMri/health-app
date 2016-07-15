@@ -7,96 +7,99 @@
     <!--<script src="https://cdnjs.cloudflare.com/ajax/libs/uikit/2.26.3/js/core/dropdown.min.js"></script>-->
     <!--<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/uikit/2.26.3/css/uikit.min.css" />-->
     <%= stylesheet_link_tag "https://fonts.googleapis.com/icon?family=Material+Icons" %>
+    
+    <%# 以下の順番を守らないと$ is not defined というエラーが起きる %>
     <%= stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track' => true %>
-
+    <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
+    
     <% if logged_in? %>
       <%= stylesheet_link_tag 'layouts/after_login', media: 'all', 'data-turbolinks-track' => true %>
+      <%= javascript_include_tag 'layouts/after_login', 'data-turbolinks-track' => true %>
     <% else %>
       <%= javascript_include_tag 'layouts/before_login', 'data-turbolinks-track' => true %>
     <% end %>
     
-    <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
+
     <%= csrf_meta_tags %>
   </head>
   <body>
     
     <header>
       <% if logged_in? %>
-      <%# ログイン後 %>
-      <%# navbar %>
-      <nav class="top-nav">
-        <div class="container">
-          <div class="nav-wrapper">
-            <a class="brand-logo">Health app</a>
-            <a href="#" data-activates="nav-mobile" class="button-collapse top-nav full hide-on-large-only">
-              <i class="material-icons">menu</i>
-            </a>
+        <%# ログイン後 %>
+        <%# navbar %>
+        <nav class="top-nav">
+          <div class="container">
+            <div class="nav-wrapper">
+              <a class="brand-logo">Health app</a>
+              <a href="#" data-activates="nav-mobile" class="button-collapse top-nav full hide-on-large-only">
+                <i class="material-icons">menu</i>
+              </a>
+            </div>
           </div>
-        </div>
-      </nav>
-      
-      <%# sideナビ %>
-      <ul id="nav-mobile" class="side-nav fixed">
-        <%# 画像部分 %>
-        <div class="row">
-          <div class="col col s4 m4 l4">
-            <img src="" alt="" class="circle responsive-img">
-          </div>
-          <div class="col col s8 m8 l8">
-            <a class="btn-flat dropdown-button waves-effect waves-light" href="#" data-activates="profile-dropdown">
-              <i class="material-icons">add</i>
-            </a>
-            <ul id="profile-dropdown" class="dropdown-content">
-              <li>
-                <%= link_to("Profile", user_path(current_user)) %>
-              </li>
-              <li>
-                <%= link_to("Settings", edit_user_path(current_user)) %>
-              </li>
-              <li>
-                <%= link_to("Logout", logout_path, {method: "delete"}) %>
-              </li>
-            </ul>
-          </div>
-        </div>
+        </nav>
         
-        <!--<li class="logo">-->
-        <!--  <a id="logo-container" href="http://materializecss.com/" class="brand-logo"></a></li>-->
-        <li class="bold"><a href="about.html" class="waves-effect waves-teal">Graph</a></li>
-        <li class="bold"><a href="getting-started.html" class="waves-effect waves-teal">Training Menu</a></li>
-        <li class="bold"><a href="http://materializecss.com/mobile.html" class="waves-effect waves-teal">xxxx</a></li>
-        <li class="bold"><a href="showcase.html" class="waves-effect waves-teal">Articles</a></li>
-      </ul>
+        <%# sideナビ %>
+        <ul id="nav-mobile" class="side-nav fixed">
+          <%# 画像部分 %>
+          <div class="row">
+            <div class="col col s4 m4 l4">
+              <img src="" alt="" class="circle responsive-img">
+            </div>
+            <div class="col col s8 m8 l8">
+              <a class="btn-flat dropdown-button waves-effect waves-light" href="#" data-activates="profile-dropdown">
+                <i class="material-icons">add</i>
+              </a>
+              <ul id="profile-dropdown" class="dropdown-content">
+                <li>
+                  <%= link_to("Profile", user_path(current_user)) %>
+                </li>
+                <li>
+                  <%= link_to("Settings", edit_user_path(current_user)) %>
+                </li>
+                <li>
+                  <%= link_to("Logout", logout_path, {method: "delete"}) %>
+                </li>
+              </ul>
+            </div>
+          </div>
+          
+          <!--<li class="logo">-->
+          <!--  <a id="logo-container" href="http://materializecss.com/" class="brand-logo"></a></li>-->
+          <li class="bold"><a href="about.html" class="waves-effect waves-teal">Graph</a></li>
+          <li class="bold"><a href="getting-started.html" class="waves-effect waves-teal">Training Menu</a></li>
+          <li class="bold"><a href="http://materializecss.com/mobile.html" class="waves-effect waves-teal">xxxx</a></li>
+          <li class="bold"><a href="showcase.html" class="waves-effect waves-teal">Articles</a></li>
+        </ul>
       
       <% else %>
       
-      <%# ログイン前 %>
-      <div class="navbar-fixed">
-        <nav>
-          <div class="nav-wrapper">
-            <%= link_to("health app", '#!', {class: "brand-logo"}) %>
-            <%= link_to('#', {class: "button-collapse", "data-activates" => "nav-mobile"}) do %>
-              <i class="material-icons">menu</i>
-            <% end %>
-            <ul class="right hide-on-med-and-down">
-              <li><%= link_to "Home",root_path %></li>
-              <li><%= link_to "Training", '#' %></li>
-              <li><%= link_to "Management", '#' %></li>
-              <li><%= link_to "Articles", '#' %></li>
-              <li><%= link_to "Login", login_path %></li>
-            </ul>
-            <%# mobile layout %>
-            <ul class="side-nav" id="mobile-demo">
-              <li><%= link_to "Home",root_path %></li>
-              <li><%= link_to "Training",   '#' %></li>
-              <li><%= link_to "Management",   '#' %></li>
-              <li><%= link_to "Articles",   '#' %></li>
-              <li><%= link_to "Login", '#' %></li>
-            </ul>
-          </div>
-        </nav>
-      </div>
-      
+        <%# ログイン前 %>
+        <div class="navbar-fixed">
+          <nav>
+            <div class="nav-wrapper">
+              <%= link_to("health app", '#!', {class: "brand-logo"}) %>
+              <%= link_to('#', {class: "button-collapse", "data-activates" => "nav-mobile"}) do %>
+                <i class="material-icons">menu</i>
+              <% end %>
+              <ul class="right hide-on-med-and-down">
+                <li><%= link_to "Home",root_path %></li>
+                <li><%= link_to "Training", '#' %></li>
+                <li><%= link_to "Management", '#' %></li>
+                <li><%= link_to "Articles", '#' %></li>
+                <li><%= link_to "Login", login_path %></li>
+              </ul>
+              <%# mobile layout %>
+              <ul class="side-nav" id="nav-mobile">
+                <li><%= link_to "Home",root_path %></li>
+                <li><%= link_to "Training",   '#' %></li>
+                <li><%= link_to "Management",   '#' %></li>
+                <li><%= link_to "Articles",   '#' %></li>
+                <li><%= link_to "Login", '#' %></li>
+              </ul>
+            </div>
+          </nav>
+        </div>
 
       <% end %>
     </header>
@@ -110,16 +113,16 @@
   
   <%# テストゾーン %>
   <script>
-    $('.dropdown-button').dropdown({
-      inDuration: 300,
-      outDuration: 225,
-      constrain_width: false, // Does not change width of dropdown to that of the activator
-      hover: true, // Activate on hover
-      gutter: 0, // Spacing from edge
-      belowOrigin: true, // Displays dropdown below the button
-      alignment: 'left' // Displays dropdown with edge aligned to the left of button
-    }
-  );
+  // $('.dropdown-button').dropdown({
+  //   inDuration: 300,
+  //   outDuration: 225,
+  //   constrain_width: false, // Does not change width of dropdown to that of the activator
+  //   hover: true, // Activate on hover
+  //   gutter: 0, // Spacing from edge
+  //   belowOrigin: true, // Displays dropdown below the button
+  //   alignment: 'left' // Displays dropdown with edge aligned to the left of button
+  //   }
+  // );
   </script>
   <style>
   </style>
