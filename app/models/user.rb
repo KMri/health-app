@@ -1,4 +1,7 @@
 class User < ActiveRecord::Base
+  has_one :user_info, dependent: :destroy
+  accepts_nested_attributes_for :user_info, allow_destroy: true
+  
   # 保存前にすべて小文字にして保存する
   before_save { self.email = self.email.downcase }
   validates(:code, {presence: true})
@@ -11,4 +14,5 @@ class User < ActiveRecord::Base
   validates :password, presence: true, length: { minimum: 6 }
   
   has_secure_password
+  has_one :user_info
 end

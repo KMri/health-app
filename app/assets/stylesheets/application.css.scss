@@ -10,7 +10,11 @@
  * defined in the other CSS/SCSS files in this directory. It is generally better to create a new
  * file per style scope.
  *
- *= require_tree .
+ * require_tree ../../../vendor/assets/stylesheets/.
  *= require_self
  */
-@import "uikit";
+
+@import "materialize/components/color";
+$primary-color: color("brown", "darken-1") !default;
+@import 'materialize';
+

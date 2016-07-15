@@ -1,0 +1,36 @@
+<h1>Log in</h1>
+
+<div class="row">
+  <%= form_for(:session, {url: login_path, html: {class: "coll s12"}}) do |f| %>
+    <%# email %>
+    <div class="row">
+      <div class="input-field col s12">
+        <%= f.label :email %>
+        <%= f.email_field :email %>
+      </div>
+    </div>
+    <%# password %>
+    <div class="row">
+      <div class="input-field col s12">
+        <%= f.label :password %>
+        <%= f.password_field :password %>
+      </div>
+    </div>
+
+    <%= button_tag("Log in", {class: "btn waves-effect waves-light orange", type: "submit"}) %>
+
+  <% end %>
+
+  <p>New user? <%= link_to "Sign up now!", new_user_path %></p>
+</div>
+<style>
+    /*
+    When creating your CSS selector,
+    change "brown" to something of your choosing
+    */
+    .waves-effect {
+     /* The alpha value allows the text and background color
+     of the button to still show through. */
+      background-color: orange;
+    }
+</style>

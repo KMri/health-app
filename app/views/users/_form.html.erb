@@ -1,0 +1,59 @@
+<div class="row">
+  <%= form_for(user, html: {class: "coll s12"}) do |f| %>
+    <%# code %>
+    <div class="row">
+      <div class="input-field col s12">
+        <%= f.label :code, "UserID" %>
+        <%= f.text_field :code %>
+      </div>
+    </div>
+    <%# email %>
+    <div class="row">
+      <div class="input-field col s12">
+        <%= f.label :email %>
+        <%= f.email_field :email %>
+      </div>
+    </div>
+    <%# password %>
+    <div class="row">
+      <div class="input-field col s12">
+        <%= f.label :password %>
+        <%= f.password_field :password %>
+      </div>
+    </div>
+    <%# password_confirmation %>
+    <div class="row">
+      <div class="input-field col s12">
+        <%= f.label :password_confirmation %>
+        <%= f.password_field :password_confirmation %>
+      </div>
+    </div>
+    
+    <% if edit_page?(mode) == true %>
+      <%# 第二引数で@user.user_infoが存在するかチェック %>
+      <%= f.fields_for(:user_info, user.user_info) do |ui| %>
+        <div class="row">
+          <%= ui.radio_button :sex, "man" %>
+          <%= ui.label :sex, "男" , value: "man" %>
+          <%= ui.radio_button :sex, "female" %>
+          <%= ui.label :sex, "女" , value: "female" %>
+        </div>
+        <div class="row">
+          <div class="input-field col s12">
+            <%= ui.label :age %><br>
+            <%= ui.text_field :age %>
+          </div>
+        </div>
+        <div class="row">
+          <div class="input-field col s12">
+            <%= ui.label :birthday %><br>
+            <%= ui.date_field :birthday, {class: 'datepicker'} %>
+          </div>
+        </div>
+      <% end %> 
+    <% end %>
+    
+    <%= button_tag(mode, {class: "btn waves-effect waves-light orange",
+                                         type: "submit"}) %>
+  <% end %>
+</div>

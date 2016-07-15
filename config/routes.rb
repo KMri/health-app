@@ -1,7 +1,13 @@
 Rails.application.routes.draw do
-  get 'users/new'
+  # セッション
+  get    'login'   => 'sessions#new'
+  post   'login'   => 'sessions#create'
+  delete 'logout'  => 'sessions#destroy'
 
+  # 静的ページ
   root 'static_pages#home'
+  
+  # ユーザ
   resources :users
 
   # The priority is based upon order of creation: first created -> highest priority.
