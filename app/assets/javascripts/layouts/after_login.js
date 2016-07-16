@@ -1,13 +1,12 @@
-jQuery(function(){
+$(function(){
     
-
-jQuery('.button-collapse').sideNav({
-    menuWidth: 300, // Default is 240
-    edge: 'left', // Choose the horizontal origin
-  }
-);
-
-jQuery('.dropdown-button').dropdown({
+    $('.button-collapse').sideNav({
+        menuWidth: 300, // Default is 240
+        edge: 'left', // Choose the horizontal origin
+      }
+    );
+    
+    $('.dropdown-button').dropdown({
         inDuration: 300,
         outDuration: 225,
         constrain_width: false, // Does not change width of dropdown to that of the activator
@@ -15,6 +14,10 @@ jQuery('.dropdown-button').dropdown({
         gutter: 0, // Spacing from edge
         belowOrigin: true, // Displays dropdown below the button
         alignment: 'left' // Displays dropdown with edge aligned to the left of button
-    }
-);
+    });
+  // カレンダー
+  $('.datepicker').pickadate({
+    selectMonths: true, // Creates a dropdown to control month
+    selectYears: 15 // Creates a dropdown of 15 years to control year
+  });
 });

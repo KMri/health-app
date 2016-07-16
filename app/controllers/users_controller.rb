@@ -1,5 +1,7 @@
 class UsersController < ApplicationController
   before_action :set_user, only: [:show, :edit, :update]
+  before_action :logged_in_user
+  before_action :correct_user, only: [:edit, :update]
   
   def new
     @user = User.new
@@ -16,15 +18,16 @@ class UsersController < ApplicationController
   # 編集画面
   def edit
     #@user.user_info = UserInfo.new if @user.user_info.blank?
-    @user.user_info.build unless @user.user_info.present?
+    # @user.user_info.build unless @user.user_info.present?
+    @user.build_user_info unless @user.user_info.present?
   end
   
   # ユーザ情報の変更処理
   def update
-    @user.user_info.user_id = @user.id
+    # @user.user_info.user_id = @user.id
     if @user.update(user_info_params)
       # 更新に成功したときの処理
-      redirect_to @user
+      redirect_to(user_url(@user))
     else
       render 'edit'
     end
@@ -58,10 +61,20 @@ class UsersController < ApplicationController
   
   # Edit（ユーザ更新）のパラメータ
   def user_info_params
-    # params.require(:user).permit(:code, :email, :password, :password_confirmation)
-    # params.require(:user_info).permit(:seq, :user_id, :sex, :age, :birthday)
-    
     params.require(:user).permit(:code, :email, :password, :password_confirmation, 
                                  user_info_attributes: [:sex, :age, :birthday, :_destroy, :id])
+  end
+  
+  # ログイン済みユーザーかどうか確認
+  def logged_in_user
+    unless logged_in?
+      flash[:danger] = "Please log in."
+      redirect_to login_path
+    end
+  end
+  
+  # 正しいユーザーかどうか確認
+  def correct_user
+    redirect_to(user_path(set_user)) unless set_user == current_user
   end
 end

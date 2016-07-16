@@ -11,8 +11,13 @@ class User < ActiveRecord::Base
                      format: { with: VALID_EMAIL_REGEX },
                      uniqueness: {case_sensitive: false} # 大文字、小文字の区別をする
                     })
-  validates :password, presence: true, length: { minimum: 6 }
+  validates(:password, presence: true, length: { minimum: 6 }, allow_blank: :update)
+  
+  # updateのときは、パスワード、Emailを必須にしない
+  # validates(:password, length: { minimum: 6 }, allow_blank: :update)
+  # validates(:email, {format: { with: VALID_EMAIL_REGEX },
+  #                   uniqueness: {case_sensitive: false} # 大文字、小文字の区別をする
+  #                   }, on: :update)
   
   has_secure_password
-  has_one :user_info
 end
