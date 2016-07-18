@@ -11,7 +11,26 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160712113014) do
+ActiveRecord::Schema.define(version: 20160718025034) do
+
+  create_table "conditions", force: :cascade do |t|
+    t.integer  "user_id"
+    t.integer  "dkind_id"
+    t.integer  "val"
+    t.datetime "record_date"
+    t.datetime "created_at",  null: false
+    t.datetime "updated_at",  null: false
+  end
+
+  add_index "conditions", ["dkind_id"], name: "index_conditions_on_dkind_id"
+  add_index "conditions", ["user_id"], name: "index_conditions_on_user_id"
+
+  create_table "dkinds", force: :cascade do |t|
+    t.integer "seq"
+    t.string  "jp"
+    t.string  "en"
+    t.string  "unit"
+  end
 
   create_table "user_infos", force: :cascade do |t|
     t.integer "seq"

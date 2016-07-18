@@ -1,0 +1,13 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  seq: 1
+  jp: MyString
+  en: MyString
+  unit: MyString
+
+two:
+  seq: 1
+  jp: MyString
+  en: MyString
+  unit: MyString

@@ -1,4 +1,12 @@
 Rails.application.routes.draw do
+  get 'body_managements/new'
+
+  get 'body_managements/show'
+
+  get 'body_managements/create'
+
+  get 'body_managements/edit'
+
   # セッション
   get    'login'   => 'sessions#new'
   post   'login'   => 'sessions#create'
