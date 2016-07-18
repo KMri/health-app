@@ -1,4 +1,55 @@
-<% provide(:title, 'index') %>
-<h1>index</h1>
+<% provide(:title, 'Members') %>
+<h1>Members</h1>
 
-<ul><%= render @users %></ul>
+<%# Userの表示 %>
+<% @offset_users.each do |user| %>
+  <%= user.email %><br />
+<% end %>
+
+<%# ページネーション %>
+<ul class="pagination">
+  
+  <%# 1つ戻るボタン（＜） %>
+  <% if @page == 1 %>
+    <li class="disabled">
+      <%= link_to("#") do %>
+        <i class="material-icons">chevron_left</i>
+      <% end %>
+    </li>    
+  <% else %>
+    <li class="waves-effect">
+      <%= link_to(users_path(:page => @page - 1)) do %>
+        <i class="material-icons">chevron_left</i>
+      <% end %>
+    </li>
+  <% end %>
+  
+  <%# ページ数表示 %>
+  <% @pages.each do |page| %>
+    <%# 表示中のページはページ番号に色をつける %>
+    <% if page == @page %>
+      <li class="active">
+        <%= link_to("#{page}",'#') %>
+      </li>
+    <% else %>
+      <li class="waves-effect">
+        <%= link_to("#{page}",users_path(page: page)) %>
+      </li>
+    <% end %>
+  <% end %>
+  
+  <%# 1つ進むボタン（＞） %>
+  <% if @page == @pages.size %>
+    <li class="disabled">
+      <%= link_to("#") do %>
+        <i class="material-icons">chevron_right</i>
+      <% end %>
+    </li>    
+  <% else %>
+    <li class="waves-effect">
+      <%= link_to(users_path(:page => @page + 1)) do %>
+        <i class="material-icons">chevron_right</i>
+      <% end %>
+    </li>
+  <% end %>
+</ul>

@@ -1,6 +1,6 @@
 class UsersController < ApplicationController
   before_action :set_user, only: [:show, :edit, :update]
-  before_action :logged_in_user
+  before_action :logged_in_user, only: [:show]
   before_action :correct_user, only: [:edit, :update]
   
   def new
@@ -9,6 +9,42 @@ class UsersController < ApplicationController
 
   def index
     @users = User.all
+    
+    # ----------------
+    # ページネーション
+    # ----------------
+    @page = params[:page].to_i
+    
+    # １ページに表示できるユーザ数
+    @page_num = 2
+
+    # 全ページ数
+    all_page = @users.size / @page_num
+
+    # 全ページ数が10以下なら1から全ページ数までを配列にする
+    # 全ページ数が10より大きいならカレントページを中心に10ページ分を配列にする
+    if all_page > 10
+      first = [1,  @page - 4].max
+      first = [first, all_page - 9].min
+      last  = [10, @page + 5].max
+      last  = [last, all_page].min
+      
+      @pages = [first..last]
+    else
+      @pages = [*1..all_page]
+    end
+    
+    # offset: xx番目から
+    # limit: xx個分取得する
+    @offset_users = @users.order("code ASC")
+                          .offset(@page * @page_num)
+                          .limit(@page_num)
+                          
+    # offset後にこの処理を実行
+    # 初回アクセスはnilなので、1を入れる
+    if params[:page].nil?
+      @page = 1
+    end
   end
 
   # ログイン後の画面(プロフィール画面)
