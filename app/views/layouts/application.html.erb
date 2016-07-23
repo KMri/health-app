@@ -67,6 +67,7 @@
           <!--<li class="logo">-->
           <!--  <a id="logo-container" href="http://materializecss.com/" class="brand-logo"></a></li>-->
           <li class="bold"><%= link_to("Members", users_path, {class: "waves-effect waves-teal"}) %></li>
+          <li class="bold"><%= link_to("Record", new_body_management_path, {class: "waves-effect waves-teal"}) %></li>
           <li class="bold"><a href="about.html" class="waves-effect waves-teal">Graph</a></li>
           <li class="bold"><a href="getting-started.html" class="waves-effect waves-teal">Training Menu</a></li>
           <li class="bold"><a href="http://materializecss.com/mobile.html" class="waves-effect waves-teal">xxxx</a></li>
@@ -86,7 +87,7 @@
               <ul class="right hide-on-med-and-down">
                 <li><%= link_to "Home",root_path %></li>
                 <li><%= link_to "Training", '#' %></li>
-                <li><%= link_to "Management", '#' %></li>
+                <li><%= link_to "Record", '#' %></li>
                 <li><%= link_to "Articles", '#' %></li>
                 <li><%= link_to "Login", login_path %></li>
               </ul>
@@ -94,7 +95,7 @@
               <ul class="side-nav" id="nav-mobile">
                 <li><%= link_to "Home",root_path %></li>
                 <li><%= link_to "Training",   '#' %></li>
-                <li><%= link_to "Management",   '#' %></li>
+                <li><%= link_to "Record",   '#' %></li>
                 <li><%= link_to "Articles",   '#' %></li>
                 <li><%= link_to "Login", '#' %></li>
               </ul>

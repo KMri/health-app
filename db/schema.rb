@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160718025034) do
+ActiveRecord::Schema.define(version: 20160723112349) do
 
   create_table "conditions", force: :cascade do |t|
     t.integer  "user_id"
@@ -31,6 +31,17 @@ ActiveRecord::Schema.define(version: 20160718025034) do
     t.string  "en"
     t.string  "unit"
   end
+
+  create_table "user_dkinds", force: :cascade do |t|
+    t.integer  "user_id"
+    t.integer  "dkind_id"
+    t.float    "target"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  add_index "user_dkinds", ["dkind_id"], name: "index_user_dkinds_on_dkind_id"
+  add_index "user_dkinds", ["user_id"], name: "index_user_dkinds_on_user_id"
 
   create_table "user_infos", force: :cascade do |t|
     t.integer "seq"

@@ -1,22 +1,29 @@
 Rails.application.routes.draw do
-  get 'body_managements/new'
+  get 'dkinds/new'
 
-  get 'body_managements/show'
+  get 'dkinds/show'
 
-  get 'body_managements/create'
+  get 'dkinds/create'
 
-  get 'body_managements/edit'
+  get 'dkinds/edit'
+
+  get 'dkinds/update'
+
+  get 'dkinds/destroy'
+
+  # 静的ページ
+  root 'static_pages#home'
 
   # セッション
   get    'login'   => 'sessions#new'
   post   'login'   => 'sessions#create'
   delete 'logout'  => 'sessions#destroy'
-
-  # 静的ページ
-  root 'static_pages#home'
   
   # ユーザ
   resources :users
+  
+  # 体重・体脂肪・・・管理
+  resources :body_managements
 
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
