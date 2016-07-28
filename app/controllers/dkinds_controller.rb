@@ -1,5 +1,6 @@
 class DkindsController < ApplicationController
   def new
+
   end
 
   def show

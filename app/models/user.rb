@@ -1,5 +1,9 @@
 class User < ActiveRecord::Base
   has_one :user_info, dependent: :destroy
+  has_many :conditions, foreign_key: "user_id", dependent: :destroy
+  
+  has_many :user_dkinds
+  has_many :dkinds, through: :user_dkinds
   accepts_nested_attributes_for :user_info, allow_destroy: true
   
   # 保存前にすべて小文字にして保存する

@@ -1,15 +1,15 @@
 Rails.application.routes.draw do
-  get 'dkinds/new'
+  get 'user_dkinds/new'
 
-  get 'dkinds/show'
+  get 'user_dkinds/show'
 
-  get 'dkinds/create'
+  get 'user_dkinds/create'
 
-  get 'dkinds/edit'
+  get 'user_dkinds/edit'
 
-  get 'dkinds/update'
+  get 'user_dkinds/update'
 
-  get 'dkinds/destroy'
+  get 'user_dkinds/destroy'
 
   # 静的ページ
   root 'static_pages#home'
@@ -21,9 +21,12 @@ Rails.application.routes.draw do
   
   # ユーザ
   resources :users
-  
-  # 体重・体脂肪・・・管理
-  resources :body_managements
+  # ユーザとマスタデータのリレーション
+  resources :user_dkinds
+  # 体重などのマスタデータ
+  resources :dkinds
+  # ユーザごと、日時ごとの記録
+  resources :conditions
 
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".

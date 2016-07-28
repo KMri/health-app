@@ -1,0 +1,15 @@
+<h1>Conditions#new</h1>
+
+<div class="row">
+  <%= form_for(@condition, html: {class: "coll s12"}) do |f| %>
+    <%# val %>
+    <div class="row">
+      <div class="col s12">
+        <%= f.select :val, options_for_select(@select_weight) %>
+      </div>
+    </div>
+    
+    <%= button_tag('登録', {class: "btn waves-effect waves-light orange",
+                                         type: "submit"}) %>
+  <% end %>
+</div>

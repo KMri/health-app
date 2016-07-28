@@ -1,0 +1,28 @@
+<h1>UserDkinds#new</h1>
+<div class="row">
+  <%= form_for(@user_dkind, html: {class: "coll s12"}) do |f| %>
+    <% @dkinds.each_with_index do |dkind, idx| %>
+      <%#  %>
+      <div class="row">
+        <div class="switch col s2">
+          <h6><%= dkind.jp %></h6>
+        </div>
+        <div class="switch col s10">
+          <label>
+            使用しない
+            <%= f.check_box @dkind_names[idx],
+                            {checked: :true},
+                            dkind.id,
+                            "false" %>
+            <span class="lever"></span>
+            使用する
+          </label>
+          
+        </div>
+      </div>
+    <% end %>
+
+    <%= button_tag('登録', {class: "btn waves-effect waves-light orange",
+                                         type: "submit"}) %>
+  <% end %>
+</div>
