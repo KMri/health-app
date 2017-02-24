@@ -38,7 +38,7 @@ ActiveRecord::Schema.define(version: 20170220072725) do
 
   create_table "dkinds", force: :cascade do |t|
     t.integer "seq"
-    t.integer "code"
+    t.string  "code"
     t.string  "jp"
     t.string  "en"
     t.string  "unit"
@@ -55,14 +55,21 @@ ActiveRecord::Schema.define(version: 20170220072725) do
   add_index "user_dkinds", ["dkind_id"], name: "index_user_dkinds_on_dkind_id"
   add_index "user_dkinds", ["user_id"], name: "index_user_dkinds_on_user_id"
 
+  create_table "user_infos", force: :cascade do |t|
+    t.integer "seq"
+    t.integer "user_id"
+    t.string  "sex"
+    t.integer "age"
+    t.date    "birthday"
+  end
+
+  add_index "user_infos", ["user_id"], name: "index_user_infos_on_user_id"
+
   create_table "users", force: :cascade do |t|
     t.integer  "seq"
     t.string   "code"
     t.string   "email"
     t.string   "password_digest"
-    t.boolean  "is_man"
-    t.integer  "age"
-    t.date     "birthday"
     t.boolean  "is_admin"
     t.datetime "login_at"
     t.datetime "logout_at"

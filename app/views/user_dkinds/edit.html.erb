@@ -1,2 +1,4 @@
 <h1>UserDkinds#edit</h1>
-<p>Find me in app/views/user_dkinds/edit.html.erb</p>
+
+<%= render(partial: 'form', locals: { user_dkind: @user_dkind,
+                                      dkinds: @dkinds}) %>

@@ -5,6 +5,8 @@ class UsersController < ApplicationController
   
   def new
     @user = User.new
+    # # seqのカウント用
+    # @user_count = User.all.count
   end
 
   def index
@@ -55,7 +57,7 @@ class UsersController < ApplicationController
   def edit
     #@user.user_info = UserInfo.new if @user.user_info.blank?
     # @user.user_info.build unless @user.user_info.present?
-    @user.build_user_info unless @user.user_info.present?
+    # @user.build_user_info unless @user.user_info.present?\
   end
   
   # ユーザ情報の変更処理
@@ -76,9 +78,13 @@ class UsersController < ApplicationController
   def create
     @user = User.new(user_params)
     if @user.save
+      log_in @user
+      flash[:success] = "ログインしました"
       redirect_to(user_url(@user))
     else
+      @radio_params = params[:user][:is_man]
       render 'new'
+      # redirect_to new_user_path
     end
   
   end
@@ -91,8 +97,15 @@ class UsersController < ApplicationController
   
   # sign_upのパラメータ
   def user_params
-    params.require(:user).permit(:code, :email, :password,
-                                 :password_confirmation)
+    params.require(:user).permit(:code,
+                                 :email,
+                                 :password,
+                                 :password_confirmation,
+                                 :is_man,
+                                 :age,
+                                 :birthday,
+                                 :seq,
+                                 :login_at)
   end
   
   # Edit（ユーザ更新）のパラメータ

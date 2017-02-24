@@ -3,57 +3,100 @@
     <%# code %>
     <div class="row">
       <div class="input-field col s12">
-        <%= f.label :code, "UserID" %>
         <%= f.text_field :code %>
+        <%= f.label :code, "UserID" %>
       </div>
+      <%= render partial: 'flash_message/error_messages', locals: {field_type: :code} %>
     </div>
     <%# email %>
     <div class="row">
       <div class="input-field col s12">
-        <%= f.label :email %>
-        <%= f.email_field :email %>
+        <%= f.email_field :email, {class: 'validate'} %>
+        <%= f.label :email, {"data-error": 'wrong', "data-success": "right"} %>
       </div>
+      <%= render partial: 'flash_message/error_messages', locals: {field_type: :email} %>
     </div>
     <%# password %>
     <div class="row">
       <div class="input-field col s12">
-        <%= f.label :password %>
         <%= f.password_field :password %>
+        <%= f.label :password %>
       </div>
+      <%= render partial: 'flash_message/error_messages', locals: {field_type: :password} %>
     </div>
     <%# password_confirmation %>
     <div class="row">
       <div class="input-field col s12">
-        <%= f.label :password_confirmation %>
         <%= f.password_field :password_confirmation %>
+        <%= f.label :password_confirmation %>
+      </div>
+      <%= render partial: 'flash_message/error_messages', locals: {field_type: :password_confirmation} %>
+    </div>
+    <%# is_man %>
+    <div class="row">
+      <%= f.radio_button :is_man, 1, {:checked => ("1" == @radio_params) || user.is_man} %>
+      <%= f.label :is_man_1, "男" %>
+      <%= f.radio_button :is_man, 0, {:checked => ("0" == @radio_params) || user.is_man} %>
+      <%= f.label :is_man_0, "女" %><br />
+      <%= render partial: 'flash_message/error_messages', locals: {field_type: :is_man} %>
+    </div>
+    <%# age %>
+    <div class="row">
+      <div class="input-field col s12">
+        <%= f.select :age, Array(1..100) %>
+        <%= f.label :age %>
       </div>
     </div>
-    
-    <% if edit_page?(mode) == true %>
-      <%# 第二引数で@user.user_infoが存在するかチェック %>
-      <%= f.fields_for(:user_info, user.user_info) do |ui| %>
-        <div class="row">
-          <%= ui.radio_button :sex, "man" %>
-          <%= ui.label :sex, "男" , value: "man" %>
-          <%= ui.radio_button :sex, "female" %>
-          <%= ui.label :sex, "女" , value: "female" %>
-        </div>
-        <div class="row">
-          <div class="input-field col s12">
-            <%= ui.label :age %><br>
-            <%= ui.text_field :age %>
-          </div>
-        </div>
-        <div class="row">
-          <div class="input-field col s12">
-            <%= ui.label :birthday %><br>
-            <%= ui.date_field :birthday, {class: 'datepicker'} %>
-          </div>
-        </div>
-      <% end %> 
-    <% end %>
+    <%# birthday %>
+    <div class="row">
+      <div class="input-field col s12">
+        <%= f.date_field :birthday, {class: 'datepicker'} %>
+        <%= f.label :birthday %>
+      </div>
+      <%= render partial: 'flash_message/error_messages', locals: {field_type: :birthday} %>
+    </div>
+    <%# 順番 %>
+    <%= f.hidden_field(:seq, value: User.count + 1 ) %>
+    <%# login_at %>
+    <%= f.hidden_field(:login_at, value: DateTime.now.to_s(:db)) %>
     
     <%= button_tag(mode, {class: "btn waves-effect waves-light orange",
-                                         type: "submit"}) %>
+                                 type: "submit"}) %>
   <% end %>
 </div>
+
+<script>
+  $(function(){
+    <%# カレンダー %>
+    $('.datepicker').pickadate({
+      selectMonths: true, // Creates a dropdown to control month
+      selectYears: 15 // Creates a dropdown of 15 years to control year
+    });
+  });
+  <%#
+  // validationエラー箇所に赤色にする
+  // validationエラー時に付与されるfield_with_errorsのdivを削除する
+  // これしないとmaterializeがうまく動かない %>
+  $(function() {
+    if($('div').hasClass('field_with_errors')){
+      <%# typeごとに色付け %>
+      $('.field_with_errors').children('.input-field input[type=text]').css("border-bottom", "1px solid #F00");
+      $('.field_with_errors').children('.input-field input[type=text]').css("box-shadow", "0 1px 0 0 #F00");
+      $('.field_with_errors').children('.input-field input[type=password]').css("border-bottom", "1px solid #F00");
+      $('.field_with_errors').children('.input-field input[type=password]').css("box-shadow", "0 1px 0 0 #F00");
+      $('.field_with_errors').children('.input-field input[type=email]').css("border-bottom", "1px solid #F00");
+      $('.field_with_errors').children('.input-field input[type=email]').css("box-shadow", "0 1px 0 0 #F00");
+      $('.field_with_errors').children('input[type="radio"]').css("border", "2px solid #F00");
+      $('.field_with_errors').children('label').css("color", "#F00");
+      $('.field_with_errors').next('label').css("color", "#F00");
+      $('.error').css("color", "#F00");
+      <%# error発生時、railsが以下のclassを付与するので消す %>
+      $('.field_with_errors').parent().children("div").contents().unwrap();
+    }
+  });
+  
+  <%# selectボックス用の初期化が必要らしい %>
+  $(document).ready(function() {
+    $('select').material_select();
+  });
+</script>

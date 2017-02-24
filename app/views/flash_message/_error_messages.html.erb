@@ -1,0 +1,3 @@
+<% if @user.errors.any? %>
+  <span class="error"><%= @user.errors.messages[field_type][0] %></span>
+<% end %>

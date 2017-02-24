@@ -9,14 +9,14 @@
     <%= stylesheet_link_tag "https://fonts.googleapis.com/icon?family=Material+Icons" %>
     
     <%# 以下の順番を守らないと$ is not defined というエラーが起きる %>
-    <%= stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track' => true %>
-    <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
+    <%= stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track' => false %>
+    <%= javascript_include_tag 'application', 'data-turbolinks-track' => false %>
     
     <% if logged_in? %>
-      <%= stylesheet_link_tag 'layouts/after_login', media: 'all', 'data-turbolinks-track' => true %>
-      <%= javascript_include_tag 'layouts/after_login', 'data-turbolinks-track' => true %>
+      <%= stylesheet_link_tag 'layouts/after_login', media: 'all', 'data-turbolinks-track' => false %>
+      <%= javascript_include_tag 'layouts/after_login', 'data-turbolinks-track' => false %>
     <% else %>
-      <%= javascript_include_tag 'layouts/before_login', 'data-turbolinks-track' => true %>
+      <%= javascript_include_tag 'layouts/before_login', 'data-turbolinks-track' => false %>
     <% end %>
     
 
@@ -71,7 +71,7 @@
           <li class="bold"><a href="about.html" class="waves-effect waves-teal">Graph</a></li>
           <li class="bold"><a href="getting-started.html" class="waves-effect waves-teal">Training Menu</a></li>
           <li class="bold"><a href="http://materializecss.com/mobile.html" class="waves-effect waves-teal">xxxx</a></li>
-          <li class="bold"><a href="showcase.html" class="waves-effect waves-teal">Articles</a></li>
+          <li class="bold"><%= link_to("Articles", articles_path, {class: "waves-effect waves-teal"}) %></li>
         </ul>
       
       <% else %>
