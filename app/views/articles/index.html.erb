@@ -1,7 +1,33 @@
-Articles
+<% if flash[:success] %>
+  <div class="card-panel #c8e6c9 green lighten-4">
+    <%= flash[:success] %>
+  </div>
+<% end %>
+
+<% @articles.all.each do |article| %>
+  <%= article.title %>
+  <%= article.description %>
+<% end %>
+
 <%# 新規投稿ボタン %>
 <div class="fixed-action-btn">
   <%= link_to(new_article_path, {class: "btn-floating btn-large waves-effect waves-light red"}) do %>
     <i class="material-icons">mode_edit</i>
   <% end %>
 </div>
+
+<style>
+  .card-panel {
+    color: #2e7d32;
+    position: absolute;
+    top: 10px;
+    z-index: 1;
+  };
+</style>
+
+<script>
+  $(window).load(function () {
+    $(".card-panel").delay(2000).fadeOut();
+    // $(".card-panel").css({ position:’absolute’,zIndex:1000 });
+  });
+</script>

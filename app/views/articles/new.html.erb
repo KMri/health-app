@@ -1,11 +1,27 @@
 <%= form_for(@article) do |f| %>
-  <%= f.label :title %>
-  <%= f.text_field :title %>
+  <div class="row">
+    <div class="input-field col s12">
+      <i class="material-icons prefix">mode_edit</i>
+      <%= f.text_field :title %>
+      <%= f.label :title %>
+    </div>
+  </div>
   
-  <%= f.label :description %>
-  <%= f.text_area :description %>
+  <div class="row">
+    <div class="input-field col s12">
+      <i class="material-icons prefix">mode_edit</i>
+      <%= f.text_area :description, {class: "materialize-textarea"} %>
+      <%= f.label :description %>
+    </div>
+  </div>
   
   <%= button_tag('投稿', {class: "btn waves-effect waves-light orange",
                                    type: "submit"}) %>
 
 <% end %>
+
+<script>
+  $(function (){
+    $('#article_description').trigger('autoresize');
+  });
+</script>

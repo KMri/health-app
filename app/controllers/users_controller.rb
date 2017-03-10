@@ -84,7 +84,6 @@ class UsersController < ApplicationController
     else
       @radio_params = params[:user][:is_man]
       render 'new'
-      # redirect_to new_user_path
     end
   
   end
@@ -115,12 +114,13 @@ class UsersController < ApplicationController
   end
   
   # ログイン済みユーザーかどうか確認
-  def logged_in_user
-    unless logged_in?
-      flash[:danger] = "Please log in."
-      redirect_to login_path
-    end
-  end
+  # helperへ移動
+  # def logged_in_user
+  #   unless logged_in?
+  #     flash[:danger] = "Please log in."
+  #     redirect_to login_path
+  #   end
+  # end
   
   # 正しいユーザーかどうか確認
   def correct_user
