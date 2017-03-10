@@ -11,10 +11,11 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170220072725) do
+ActiveRecord::Schema.define(version: 20170310074643) do
 
   create_table "articles", force: :cascade do |t|
     t.integer  "user_id"
+    t.integer  "seq"
     t.string   "title"
     t.text     "description"
     t.boolean  "is_public",   default: false
@@ -44,6 +45,17 @@ ActiveRecord::Schema.define(version: 20170220072725) do
     t.string  "en"
     t.string  "unit"
   end
+
+  create_table "images", force: :cascade do |t|
+    t.integer  "article_id"
+    t.integer  "seq"
+    t.string   "name"
+    t.string   "file"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  add_index "images", ["article_id"], name: "index_images_on_article_id"
 
   create_table "user_dkinds", force: :cascade do |t|
     t.integer  "user_id"
