@@ -7,12 +7,13 @@ class ArticlesController < ApplicationController
   
   def new
     @article = Article.new
+    3.times { @article.images.build } # 3つの画像までOK
   end
   
   # 投稿内容登録
   def create
-    article = current_user.articles.build(article_params)
-    if article.save
+    @article = current_user.articles.build(article_params)
+    if @article.save
       redirect_to(articles_url, flash: {success: "投稿しました"})
     else
       flash.now[:error] = "失敗しました"
@@ -26,7 +27,9 @@ class ArticlesController < ApplicationController
   private
   
   def article_params
-    params.require(:article).permit(:title,
-                                    :description)
+    params.require(:article).permit(:seq,
+                                    :title,
+                                    :description,
+                                    images_attributes: [:file])
   end
 end
